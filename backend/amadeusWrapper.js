@@ -20,25 +20,25 @@ async function getAmadeusToken() {
   }
 }
 
-async function getFlights(origin, destination, departureDate, returnDate, adults = 1, travelClass = 'ECONOMY') {
+async function getFlights(origin, destination, departureDate, returnDate, adults = 1, travelClass = "ECONOMY") {
   const token = await getAmadeusToken();
   
   // Validate inputs
   if (adults < 1 || adults > 9) {
-    throw new Error('Adults must be between 1 and 9.');
+    throw new Error("Adults must be between 1 and 9.");
   }
 
-  const validClasses = ['ECONOMY', 'PREMIUM_ECONOMY', 'BUSINESS', 'FIRST'];
+  const validClasses = ["ECONOMY", "PREMIUM_ECONOMY", "BUSINESS", "FIRST"];
   if (!validClasses.includes(travelClass)) {
-    throw new Error(`Invalid travel class. Choose one of: ${validClasses.join(', ')}`);
+    throw new Error(`Invalid travel class. Choose one of: ${validClasses.join(", ")}`);
   }
 
-  const skyteamAirlines = 'AR,AM,UX,AF,CI,MU,OK,DL,GA,AZ,KQ,KL,KE,ME,SV,SK,RO,VN,VS,MF';
-  const maxResults = 100;
+  const skyteamAirlines = "AR,AM,UX,AF,CI,MU,OK,DL,GA,AZ,KQ,KL,KE,ME,SV,SK,RO,VN,VS,MF";
+  const maxResults = returnDate ? 100 : 20; // 100 for round-trip, 20 for one-way
 
   try {
     // API call to Amadeus
-    const response = await axios.get('https://test.api.amadeus.com/v2/shopping/flight-offers', {
+    const response = await axios.get("https://test.api.amadeus.com/v2/shopping/flight-offers", {
       params: {
         originLocationCode: origin,
         destinationLocationCode: destination,
@@ -47,10 +47,10 @@ async function getFlights(origin, destination, departureDate, returnDate, adults
         adults: adults,
         travelClass: travelClass,
         includedAirlineCodes: skyteamAirlines,
-        max: maxResults, // Set maximum number of results to 100
+        max: maxResults,
       },
       headers: {
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -60,7 +60,7 @@ async function getFlights(origin, destination, departureDate, returnDate, adults
     response.data.data.forEach((flight) => {
       const departureItinerary = flight.itineraries[0].segments.map(
         (segment) => ({
-          airlineName: segment.carrierCode, // Consider mapping to full names
+          airlineName: segment.carrierCode,
           flightNumber: segment.number,
           departure: {
             airport: segment.departure.iataCode,
@@ -88,7 +88,7 @@ async function getFlights(origin, destination, departureDate, returnDate, adults
 
       const returnItinerary = flight.itineraries[1]?.segments.map(
         (segment) => ({
-          airlineName: segment.carrierCode, // Consider mapping to full names
+          airlineName: segment.carrierCode,
           flightNumber: segment.number,
           departure: {
             airport: segment.departure.iataCode,
@@ -119,7 +119,7 @@ async function getFlights(origin, destination, departureDate, returnDate, adults
               totalPrice: totalItineraryPrice,
             },
           ],
-          departureMinPrice: totalItineraryPrice, // Initially set to the first price
+          departureMinPrice: totalItineraryPrice,
         });
       }
 
@@ -130,26 +130,44 @@ async function getFlights(origin, destination, departureDate, returnDate, adults
       }
     });
 
-    // Convert map to array
-    const groupedFlights = Array.from(flightsMap.values()).map((flight) => ({
-      departureItinerary: flight.departureItinerary,
-      departureMinPrice: flight.departureMinPrice.toFixed(2),
-      returnItineraries: flight.returnItineraries.map((ret) => ({
-        returnItinerary: ret.returnItinerary,
-        totalPrice: ret.totalPrice.toFixed(2),
-      })),
-      currency: "EUR", // Assuming all prices are in EUR
-    }));
+    if (!returnDate) {
+      // Return one-way flights with count
+      return {
+        flights: {
+          oneWay: {
+            results: oneWayFlights,
+            count: oneWayFlights.length
+          }
+        }
+      };
+    }
+
+    // Convert map to array and limit to 20 departure itineraries if needed
+    const groupedFlights = Array.from(flightsMap.values())
+      .slice(0, 20)
+      .map((flight) => ({
+        departureItinerary: flight.departureItinerary,
+        departureMinPrice: flight.departureMinPrice.toFixed(2),
+        returnItineraries: flight.returnItineraries.map((ret) => ({
+          returnItinerary: ret.returnItinerary,
+          totalPrice: ret.totalPrice.toFixed(2),
+        })),
+        returnCount: flight.returnItineraries.length,
+        currency: "EUR",
+      }));
 
     return {
       flights: {
-        roundTrip: groupedFlights,
-        oneWay: oneWayFlights,
-      },
+        roundTrip: {
+          results: groupedFlights,
+          count: groupedFlights.length
+        }
+      }
     };
+
   } catch (error) {
-    console.error('Error fetching flight data:', JSON.stringify(error.response?.data, null, 2));
-    throw new Error('Failed to fetch flights. Please try again later.');
+    console.error("Error fetching flight data:", JSON.stringify(error.response?.data, null, 2));
+    throw new Error("Failed to fetch flights. Please try again later.");
   }
 }
 
