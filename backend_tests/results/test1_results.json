@@ -1,0 +1,1568 @@
+{
+  "flights": {
+    "roundTrip": [],
+    "oneWay": [
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "104",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T19:30:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T08:30:00"
+            },
+            "duration": 480
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4067",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T23:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T13:15:00"
+            },
+            "duration": 500
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5173",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T16:55:00"
+            },
+            "arrival": {
+              "airport": "MCO",
+              "time": "2025-05-02T18:29:00"
+            },
+            "duration": 94
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "136",
+            "departure": {
+              "airport": "MCO",
+              "time": "2025-05-02T19:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T09:15:00"
+            },
+            "duration": 500
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5321",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T18:35:00"
+            },
+            "arrival": {
+              "airport": "TPA",
+              "time": "2025-05-02T20:02:00"
+            },
+            "duration": 87
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "130",
+            "departure": {
+              "airport": "TPA",
+              "time": "2025-05-02T21:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T11:10:00"
+            },
+            "duration": 530
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4248",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T17:00:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T19:40:00"
+            },
+            "duration": 160
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "12",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T22:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T09:40:00"
+            },
+            "duration": 390
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "3634",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:55:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T16:35:00"
+            },
+            "duration": 160
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4012",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T19:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:45:00"
+            },
+            "duration": 405
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4832",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:30:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:04:00"
+            },
+            "duration": 154
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "46",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T19:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T08:20:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5161",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:40:00"
+            },
+            "arrival": {
+              "airport": "MCO",
+              "time": "2025-05-02T15:10:00"
+            },
+            "duration": 90
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "92",
+            "departure": {
+              "airport": "MCO",
+              "time": "2025-05-02T17:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:45:00"
+            },
+            "duration": 525
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4252",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:30:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T18:13:00"
+            },
+            "duration": 163
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "158",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T20:45:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T08:35:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4460",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T17:00:00"
+            },
+            "arrival": {
+              "airport": "IAD",
+              "time": "2025-05-02T18:44:00"
+            },
+            "duration": 104
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "22",
+            "departure": {
+              "airport": "IAD",
+              "time": "2025-05-02T21:50:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T10:05:00"
+            },
+            "duration": 435
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5169",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:55:00"
+            },
+            "arrival": {
+              "airport": "MCO",
+              "time": "2025-05-02T17:28:00"
+            },
+            "duration": 93
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "136",
+            "departure": {
+              "airport": "MCO",
+              "time": "2025-05-02T19:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T09:15:00"
+            },
+            "duration": 500
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4868",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T18:10:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T20:45:00"
+            },
+            "duration": 155
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "138",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T23:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T11:30:00"
+            },
+            "duration": 430
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5193",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T18:50:00"
+            },
+            "arrival": {
+              "airport": "MIA",
+              "time": "2025-05-02T20:48:00"
+            },
+            "duration": 118
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "118",
+            "departure": {
+              "airport": "MIA",
+              "time": "2025-05-02T22:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T12:25:00"
+            },
+            "duration": 545
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5281",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T17:26:00"
+            },
+            "arrival": {
+              "airport": "TPA",
+              "time": "2025-05-02T18:53:00"
+            },
+            "duration": 87
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "130",
+            "departure": {
+              "airport": "TPA",
+              "time": "2025-05-02T21:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T11:10:00"
+            },
+            "duration": 530
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5189",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:45:00"
+            },
+            "arrival": {
+              "airport": "MIA",
+              "time": "2025-05-02T15:42:00"
+            },
+            "duration": 117
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "6",
+            "departure": {
+              "airport": "MIA",
+              "time": "2025-05-02T17:25:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:30:00"
+            },
+            "duration": 545
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4832",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:30:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:04:00"
+            },
+            "duration": 154
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "154",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T21:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T09:25:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5175",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T12:35:00"
+            },
+            "arrival": {
+              "airport": "MCO",
+              "time": "2025-05-02T14:04:00"
+            },
+            "duration": 89
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "92",
+            "departure": {
+              "airport": "MCO",
+              "time": "2025-05-02T17:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:45:00"
+            },
+            "duration": 525
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4252",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:30:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T18:13:00"
+            },
+            "duration": 163
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "12",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T22:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T09:40:00"
+            },
+            "duration": 390
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4858",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T11:59:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T14:23:00"
+            },
+            "duration": 144
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:25:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "3634",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:55:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T16:35:00"
+            },
+            "duration": 160
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "158",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T20:45:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T08:35:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4858",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T11:59:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T14:23:00"
+            },
+            "duration": 144
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "10",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:30:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:55:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5185",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T12:34:00"
+            },
+            "arrival": {
+              "airport": "MIA",
+              "time": "2025-05-02T14:30:00"
+            },
+            "duration": 116
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "6",
+            "departure": {
+              "airport": "MIA",
+              "time": "2025-05-02T17:25:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:30:00"
+            },
+            "duration": 545
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "5191",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T16:50:00"
+            },
+            "arrival": {
+              "airport": "MIA",
+              "time": "2025-05-02T18:52:00"
+            },
+            "duration": 122
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "118",
+            "departure": {
+              "airport": "MIA",
+              "time": "2025-05-02T22:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T12:25:00"
+            },
+            "duration": 545
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4422",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T14:14:00"
+            },
+            "arrival": {
+              "airport": "IAD",
+              "time": "2025-05-02T15:58:00"
+            },
+            "duration": 104
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "22",
+            "departure": {
+              "airport": "IAD",
+              "time": "2025-05-02T21:50:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T10:05:00"
+            },
+            "duration": 435
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "2605",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T21:30:00"
+            },
+            "arrival": {
+              "airport": "LGA",
+              "time": "2025-05-02T23:47:00"
+            },
+            "duration": 137
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "26",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-03T08:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T20:00:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4750",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T21:20:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T23:48:00"
+            },
+            "duration": 148
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "26",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-03T08:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T20:00:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4868",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T18:10:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T20:45:00"
+            },
+            "duration": 155
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "26",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-03T08:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T20:00:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "2607",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T20:30:00"
+            },
+            "arrival": {
+              "airport": "LGA",
+              "time": "2025-05-02T22:46:00"
+            },
+            "duration": 136
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "26",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-03T08:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T20:00:00"
+            },
+            "duration": 410
+          }
+        ],
+        "totalPrice": "483.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "2605",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T21:30:00"
+            },
+            "arrival": {
+              "airport": "LGA",
+              "time": "2025-05-02T23:47:00"
+            },
+            "duration": 137
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-03T18:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-04T06:25:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "489.16",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "KL",
+            "flightNumber": "4813",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T19:30:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T08:30:00"
+            },
+            "duration": 480
+          }
+        ],
+        "totalPrice": "508.81",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4228",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T12:30:00"
+            },
+            "arrival": {
+              "airport": "BOS",
+              "time": "2025-05-02T15:08:00"
+            },
+            "duration": 158
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4012",
+            "departure": {
+              "airport": "BOS",
+              "time": "2025-05-02T19:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:45:00"
+            },
+            "duration": 405
+          }
+        ],
+        "totalPrice": "580.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "2631",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:49:00"
+            },
+            "arrival": {
+              "airport": "MSP",
+              "time": "2025-05-02T15:28:00"
+            },
+            "duration": 159
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4040",
+            "departure": {
+              "airport": "MSP",
+              "time": "2025-05-02T17:15:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:15:00"
+            },
+            "duration": 480
+          }
+        ],
+        "totalPrice": "599.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "2633",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T12:15:00"
+            },
+            "arrival": {
+              "airport": "MSP",
+              "time": "2025-05-02T13:50:00"
+            },
+            "duration": 155
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4040",
+            "departure": {
+              "airport": "MSP",
+              "time": "2025-05-02T17:15:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:15:00"
+            },
+            "duration": 480
+          }
+        ],
+        "totalPrice": "599.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4054",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:25:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T06:00:00"
+            },
+            "duration": 515
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "7058",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T07:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:40:00"
+            },
+            "duration": 80
+          }
+        ],
+        "totalPrice": "608.00",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4054",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:25:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T06:00:00"
+            },
+            "duration": 515
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "7060",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T10:15:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T10:45:00"
+            },
+            "duration": 90
+          }
+        ],
+        "totalPrice": "608.00",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "1866",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T15:10:00"
+            },
+            "arrival": {
+              "airport": "DTW",
+              "time": "2025-05-02T17:11:00"
+            },
+            "duration": 121
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4038",
+            "departure": {
+              "airport": "DTW",
+              "time": "2025-05-02T18:25:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:05:00"
+            },
+            "duration": 460
+          }
+        ],
+        "totalPrice": "676.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4760",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:40:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T16:05:00"
+            },
+            "duration": 145
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "10",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:30:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:55:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "676.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "1858",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:15:00"
+            },
+            "arrival": {
+              "airport": "DTW",
+              "time": "2025-05-02T15:12:00"
+            },
+            "duration": 117
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4038",
+            "departure": {
+              "airport": "DTW",
+              "time": "2025-05-02T18:25:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T07:05:00"
+            },
+            "duration": 460
+          }
+        ],
+        "totalPrice": "676.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "4760",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T13:40:00"
+            },
+            "arrival": {
+              "airport": "JFK",
+              "time": "2025-05-02T16:05:00"
+            },
+            "duration": 145
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "4",
+            "departure": {
+              "airport": "JFK",
+              "time": "2025-05-02T18:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T06:25:00"
+            },
+            "duration": 445
+          }
+        ],
+        "totalPrice": "809.76",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "3948",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T21:05:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T11:20:00"
+            },
+            "duration": 495
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "7062",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T13:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T13:50:00"
+            },
+            "duration": 90
+          }
+        ],
+        "totalPrice": "837.00",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "3948",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T21:05:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T11:20:00"
+            },
+            "duration": 495
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "7063",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T15:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T16:15:00"
+            },
+            "duration": 80
+          }
+        ],
+        "totalPrice": "837.00",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "AF",
+            "flightNumber": "33",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T20:05:00"
+            },
+            "arrival": {
+              "airport": "CDG",
+              "time": "2025-05-03T10:25:00"
+            },
+            "duration": 500
+          },
+          {
+            "airlineName": "AF",
+            "flightNumber": "1780",
+            "departure": {
+              "airport": "CDG",
+              "time": "2025-05-03T13:20:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T13:45:00"
+            },
+            "duration": 85
+          }
+        ],
+        "totalPrice": "891.90",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "AF",
+            "flightNumber": "31",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T16:30:00"
+            },
+            "arrival": {
+              "airport": "CDG",
+              "time": "2025-05-03T07:00:00"
+            },
+            "duration": 510
+          },
+          {
+            "airlineName": "AF",
+            "flightNumber": "1580",
+            "departure": {
+              "airport": "CDG",
+              "time": "2025-05-03T10:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T10:30:00"
+            },
+            "duration": 90
+          }
+        ],
+        "totalPrice": "891.90",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "KL",
+            "flightNumber": "622",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T22:30:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T12:55:00"
+            },
+            "duration": 505
+          },
+          {
+            "airlineName": "KL",
+            "flightNumber": "1011",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T15:55:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T16:15:00"
+            },
+            "duration": 80
+          }
+        ],
+        "totalPrice": "903.05",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "KL",
+            "flightNumber": "622",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T22:30:00"
+            },
+            "arrival": {
+              "airport": "AMS",
+              "time": "2025-05-03T12:55:00"
+            },
+            "duration": 505
+          },
+          {
+            "airlineName": "KL",
+            "flightNumber": "1015",
+            "departure": {
+              "airport": "AMS",
+              "time": "2025-05-03T19:05:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T19:25:00"
+            },
+            "duration": 80
+          }
+        ],
+        "totalPrice": "903.05",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "VS",
+            "flightNumber": "3882",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T17:45:00"
+            },
+            "arrival": {
+              "airport": "CDG",
+              "time": "2025-05-03T08:25:00"
+            },
+            "duration": 520
+          },
+          {
+            "airlineName": "VS",
+            "flightNumber": "6660",
+            "departure": {
+              "airport": "CDG",
+              "time": "2025-05-03T10:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T10:30:00"
+            },
+            "duration": 90
+          }
+        ],
+        "totalPrice": "938.85",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "AF",
+            "flightNumber": "35",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T23:30:00"
+            },
+            "arrival": {
+              "airport": "CDG",
+              "time": "2025-05-03T14:00:00"
+            },
+            "duration": 510
+          },
+          {
+            "airlineName": "AF",
+            "flightNumber": "1280",
+            "departure": {
+              "airport": "CDG",
+              "time": "2025-05-03T16:10:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T16:35:00"
+            },
+            "duration": 85
+          }
+        ],
+        "totalPrice": "1004.90",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "AF",
+            "flightNumber": "35",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T23:30:00"
+            },
+            "arrival": {
+              "airport": "CDG",
+              "time": "2025-05-03T14:00:00"
+            },
+            "duration": 510
+          },
+          {
+            "airlineName": "AF",
+            "flightNumber": "1180",
+            "departure": {
+              "airport": "CDG",
+              "time": "2025-05-03T18:15:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T18:35:00"
+            },
+            "duration": 80
+          }
+        ],
+        "totalPrice": "1004.90",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "SK",
+            "flightNumber": "930",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T19:00:00"
+            },
+            "arrival": {
+              "airport": "CPH",
+              "time": "2025-05-03T10:20:00"
+            },
+            "duration": 560
+          },
+          {
+            "airlineName": "SK",
+            "flightNumber": "503",
+            "departure": {
+              "airport": "CPH",
+              "time": "2025-05-03T12:35:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T13:35:00"
+            },
+            "duration": 120
+          }
+        ],
+        "totalPrice": "3337.58",
+        "currency": "EUR"
+      },
+      {
+        "departureItinerary": [
+          {
+            "airlineName": "SK",
+            "flightNumber": "930",
+            "departure": {
+              "airport": "ATL",
+              "time": "2025-05-02T19:00:00"
+            },
+            "arrival": {
+              "airport": "CPH",
+              "time": "2025-05-03T10:20:00"
+            },
+            "duration": 560
+          },
+          {
+            "airlineName": "SK",
+            "flightNumber": "505",
+            "departure": {
+              "airport": "CPH",
+              "time": "2025-05-03T15:00:00"
+            },
+            "arrival": {
+              "airport": "LHR",
+              "time": "2025-05-03T16:00:00"
+            },
+            "duration": 120
+          }
+        ],
+        "totalPrice": "3337.58",
+        "currency": "EUR"
+      }
+    ]
+  }
+}
