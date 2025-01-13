@@ -1,0 +1,10 @@
+[
+  {
+    "origin": "ATL",
+    "destination": "LHR",
+    "departureDate": "2025-02-16",
+    "returnDate": "2025-02-21",
+    "price": "572.05",
+    "flightOffersLink": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=ATL&destinationLocationCode=LHR&departureDate=2025-02-16&returnDate=2025-02-21&adults=1&nonStop=false&maxPrice=1000&currency=USD"
+  }
+]
