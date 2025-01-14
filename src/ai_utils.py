@@ -4,6 +4,17 @@ from dataclasses import dataclass
 from abc import ABC, abstractmethod
 import openai
 import json
+import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+def load_prompt(filename: str) -> str:
+    with open(f"./prompts/{filename}.txt", "r") as f:
+        return f.read()
 
 # Intent Classification
 class Intent(Enum):
@@ -81,28 +92,13 @@ class ConversationManager:
         return response
     
     async def classify_intent(message: str) -> Intent:
-        """
-        Use GPT-4 to classify user intent from their message.
-        Returns a specific Intent enum value.
-        """
-        system_prompt = """You are a flight booking assistant. Classify the user's intent.
-        
-        Return a JSON object with a single field:
-        {
-            "intent": "direct_flight" | "inspiration" | "unknown"
-        }
-        
-        Where:
-        - direct_flight: User wants to book a specific flight between locations
-        - inspiration: User wants suggestions for where to travel from a particular origin airport
-        - unknown: Can't determine the intent"""
-
+        """Use GPT-4 to classify user intent from their message."""
         try:
-            response = await openai.chat.completions.create(
+            response = await client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=[
-                    {"role": "system", "content": system_prompt},
+                    {"role": "system", "content": load_prompt("intent_classification")},
                     {"role": "user", "content": message}
                 ],
                 temperature=0
@@ -123,41 +119,16 @@ class ConversationManager:
     
     async def _update_state(self, message: str) -> None:
         """Extract relevant information from user message and update state."""
-        system_prompt = f"""You are a flight booking assistant. Extract relevant information from the user message.
-        Current intent: {self.current_intent.value}
-        
-        Return a JSON object with any of these fields that are mentioned (only include fields that are explicitly mentioned):
-        
-        For direct_flight:
-        {{
-            "origin": "IATA code",
-            "destination": "IATA code",
-            "departure_date": "YYYY-MM-DD",
-            "return_date": "YYYY-MM-DD",  # Optional - omit for one-way flights
-            "passengers": number,
-            "travel_class": "ECONOMY" | "BUSINESS" | "FIRST"
-        }}
-        
-        For inspiration:
-        {{
-            "origin": "IATA code",
-            "date_range": ["YYYY-MM-DD", "YYYY-MM-DD"],  # If user provides single date, use same date twice
-            "duration": number,
-            "max_price": number
-        }}
-        
-        Notes:
-        - For direct flights, return_date is optional. Omit it for one-way flights.
-        - For inspiration search, date_range is inclusive. If user mentions only one date, use it as both start and end date.
-        - Always convert dates to YYYY-MM-DD format.
-        - Always convert airport names to IATA codes."""
-
         try:
-            response = await openai.chat.completions.create(
+            prompt = load_prompt("state_update").format(
+                intent=self.current_intent.value
+            )
+            
+            response = await client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=[
-                    {"role": "system", "content": system_prompt},
+                    {"role": "system", "content": prompt},
                     {"role": "user", "content": message}
                 ],
                 temperature=0
@@ -177,37 +148,27 @@ class ConversationManager:
         if not self.current_state:
             return "I'm not sure what you're looking for. Can you please clarify if you want to book a specific flight or get travel suggestions?"
 
-        # Create a summary of the current state
         state_dict = {key: getattr(self.current_state, key) 
                      for key in self.current_state.__annotations__}
         
-        system_prompt = f"""You are a helpful flight booking assistant.
-        Current intent: {self.current_intent.value}
-        Current state: {json.dumps(state_dict)}
-        
-        If the state is complete, summarize the search criteria and indicate you'll search for flights.
-        If the state is incomplete, ask for the missing required information in a natural, conversational way.
-        
-        Return a JSON object:
-        {{
-            "response": "your response message",
-            "state_complete": boolean
-        }}"""
-
         try:
-            response = await openai.chat.completions.create(
+            prompt = load_prompt("response_generation").format(
+                intent=self.current_intent.value,
+                state=json.dumps(state_dict)
+            )
+            
+            response = await client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=[
-                    {"role": "system", "content": system_prompt},
+                    {"role": "system", "content": prompt},
                     {"role": "user", "content": "Generate response"}
                 ],
-                temperature=0.7  # Slightly higher for more natural responses
+                temperature=0.7
             )
             
             result = json.loads(response.choices[0].message.content)
             
-            # If state is complete, perform the search
             if result["state_complete"] and self.current_state.is_complete():
                 if self.current_intent == Intent.DIRECT_FLIGHT:
                     # Call direct flight search
