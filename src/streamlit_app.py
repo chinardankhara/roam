@@ -59,18 +59,17 @@ def display_direct_flight_results(results: Dict[str, Any]) -> None:
     if "roundTrip" in results:
         st.subheader("✈️ Round-trip Flight Options")
         
-        # Display departure options first
+        # Step 1: Display outbound flights in a more compact way
+        st.markdown("### Select your outbound flight:")
+        
         for departure in results["roundTrip"]["results"]:
-            with st.expander(
-                f"💰 ${departure['departureMinPrice']} - {departure['departureItinerary'][0]['departure']['airport']} → "
-                f"{departure['departureItinerary'][-1]['arrival']['airport']}"
-            ):
-                st.markdown("### Outbound Flight")
+            with st.expander(f"💰 ${departure['departureMinPrice']} · {len(departure['returnItineraries'])} return options"):
+                # Display outbound flight details
                 for segment in departure['departureItinerary']:
                     airline_name = AIRLINE_CODES.get(segment['airlineName'], segment['airlineName'])
                     st.markdown(f"""
                     <div style="padding: 10px; border-left: 3px solid #1E88E5; margin: 10px 0;">
-                        <div style="font-size: 1.1em; color: #1E88E5;">
+                        <div style="font-size: 1.1em;">
                             {airline_name} {segment['flightNumber']}
                         </div>
                         <div style="display: flex; justify-content: space-between; margin: 10px 0;">
@@ -89,31 +88,40 @@ def display_direct_flight_results(results: Dict[str, Any]) -> None:
                     </div>
                     """, unsafe_allow_html=True)
                 
-                st.markdown(f"### Return Options ({departure['returnCount']} flights)")
+                # Show return options
+                st.markdown("### Return Options:")
                 for return_option in departure['returnItineraries']:
-                    st.markdown(f"#### 💰 ${return_option['totalPrice']}")
-                    for segment in return_option['returnItinerary']:
-                        airline_name = AIRLINE_CODES.get(segment['airlineName'], segment['airlineName'])
+                    with st.container():
                         st.markdown(f"""
-                        <div style="padding: 10px; border-left: 3px solid #2E7D32; margin: 10px 0;">
-                            <div style="font-size: 1.1em; color: #2E7D32;">
-                                {airline_name} {segment['flightNumber']}
+                        <div style="padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin: 10px 0;">
+                            <div style="font-size: 1.2em; color: #2E7D32;">
+                                💰 Total price: ${return_option['totalPrice']}
                             </div>
-                            <div style="display: flex; justify-content: space-between; margin: 10px 0;">
-                                <div>
-                                    <div style="font-size: 1.2em; font-weight: bold;">{segment['departure']['airport']}</div>
-                                    <div>{format_datetime(segment['departure']['time'])}</div>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-size: 1.2em; font-weight: bold;">{segment['arrival']['airport']}</div>
-                                    <div>{format_datetime(segment['arrival']['time'])}</div>
-                                </div>
-                            </div>
-                            <div style="color: #666;">
-                                ⏱️ Duration: {segment['duration'] // 60}h {segment['duration'] % 60}m
-                            </div>
-                        </div>
                         """, unsafe_allow_html=True)
+                        
+                        for segment in return_option['returnItinerary']:
+                            airline_name = AIRLINE_CODES.get(segment['airlineName'], segment['airlineName'])
+                            st.markdown(f"""
+                            <div style="padding: 10px; border-left: 3px solid #2E7D32; margin: 10px 0;">
+                                <div style="font-size: 1.1em;">
+                                    {airline_name} {segment['flightNumber']}
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                                    <div>
+                                        <div style="font-size: 1.2em; font-weight: bold;">{segment['departure']['airport']}</div>
+                                        <div>{format_datetime(segment['departure']['time'])}</div>
+                                    </div>
+                                    <div style="text-align: right;">
+                                        <div style="font-size: 1.2em; font-weight: bold;">{segment['arrival']['airport']}</div>
+                                        <div>{format_datetime(segment['arrival']['time'])}</div>
+                                    </div>
+                                </div>
+                                <div style="color: #666;">
+                                    ⏱️ Duration: {segment['duration'] // 60}h {segment['duration'] % 60}m
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+                        st.markdown("</div>", unsafe_allow_html=True)
     else:
         st.subheader("✈️ One-way Flight Options")
         for flight in results["oneWay"]["results"]:
