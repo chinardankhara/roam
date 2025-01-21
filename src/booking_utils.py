@@ -44,8 +44,12 @@ class AmadeusTokenManager:
                 self._token_cache = data["access_token"]
                 self._token_expiration = datetime.now() + timedelta(seconds=self._token_expiration_time)
                 return self._token_cache
+        except httpx.ReadTimeout as error:
+            print(f"Timeout getting Amadeus token: {error}")
+            raise ValueError("Failed to authenticate with Amadeus API - request timed out")
         except httpx.HTTPError as error:
-            print(f"Error getting Amadeus token: {error.response.json() if error.response else error}")
+            error_msg = error.response.json() if hasattr(error, "response") else str(error)
+            print(f"Error getting Amadeus token: {error_msg}")
             raise ValueError("Failed to authenticate with Amadeus API")
 
 async def get_amadeus_token() -> str:
@@ -65,21 +69,21 @@ async def get_flights(
     # Validate inputs
     if not (1 <= adults <= 9):
         raise ValueError("Adults must be between 1 and 9.")
-
+    print(1)
     valid_classes = ["ECONOMY", "PREMIUM_ECONOMY", "BUSINESS", "FIRST"]
     if travel_class not in valid_classes:
         raise ValueError(f"Invalid travel class. Choose one of: {', '.join(valid_classes)}")
-
+    print(2)
     # Convert dates to strings if they're date objects
     if isinstance(departure_date, date):
         departure_date = departure_date.isoformat()
     if isinstance(return_date, date):
         return_date = return_date.isoformat()
-
+    print(3)
     token = await get_amadeus_token()
     skyteam_airlines = "AR,AM,UX,AF,CI,MU,OK,DL,GA,AZ,KQ,KL,KE,ME,SV,SK,RO,VN,VS,MF"
     max_results = 150 if return_date else 20
-
+    print(4)
     try:
         async with httpx.AsyncClient(timeout=30.0) as client:  # Set 30-second timeout
             params = {
@@ -101,7 +105,7 @@ async def get_flights(
             )
             response.raise_for_status()
             data = response.json()
-
+        print(data)
         return {"flights": process_flights(data["data"], bool(return_date))}
 
     except httpx.TimeoutException as error:

@@ -14,15 +14,12 @@ async def chat_session():
             break
             
         try:
-            print(1)
             response = await manager.process_message(user_input)
-            print(2)
             print(f"\nAssistant: {response}")
             
             # Optional: Print current state for debugging
             if manager.current_state:
                 print("\nCurrent State:", manager.current_state.__dict__)
-            print(3)  
         except Exception as e:
             print(f"\nError: {e}")
 

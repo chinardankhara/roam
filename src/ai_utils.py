@@ -24,13 +24,16 @@ def load_prompt(prompt_type: str, **kwargs) -> str:
     else:
         prompt = prompts[prompt_type]
     
+    # Add current date information before any other replacements
+    today = datetime.now()
+    prompt = f"Today's date is {today.strftime('%Y-%m-%d')}.\n\n" + prompt
+    
     # Replace any placeholders in the prompt with provided kwargs
     for key, value in kwargs.items():
         placeholder = "{" + key + "}"
         if placeholder in prompt:
             prompt = prompt.replace(placeholder, str(value))
     
-    prompt += f"\nCurrent date and time: {datetime.now().isoformat()}"
     return prompt
 
 # Intent Classification
@@ -58,15 +61,24 @@ class DirectFlightState(ConversationState):
     return_date: Optional[str] = None
     passengers: int = 1
     travel_class: str = "ECONOMY"
+    is_one_way: bool = False
     
     def update(self, key: str, value: Any) -> None:
+        if key == "return_date" and value == "":
+            self.is_one_way = True
+            return
         setattr(self, key, value)
     
     def get(self, key: str) -> Any:
         return getattr(self, key)
     
     def is_complete(self) -> bool:
-        return all([self.origin, self.destination, self.departure_date])
+        return all([
+            self.origin,
+            self.destination,
+            self.departure_date,
+            (self.return_date is not None or self.is_one_way)
+        ])
 
 @dataclass
 class InspirationState(ConversationState):
@@ -103,10 +115,8 @@ class ConversationManager:
         
         # 2. Update state based on message
         await self._update_state(message)
-        print(4)
         # 3. Generate response based on current state
         response = await self._generate_response()
-        print(5)
         # 4. Update history
         self._update_history(message, response)
         
@@ -139,11 +149,14 @@ class ConversationManager:
         return None
     
     async def _update_state(self, message: str) -> None:
-        """Extract relevant information from user message and update state."""
         try:
             print("Debug: Starting _update_state")
             if self.current_state is None:
                 print("Debug: No current state")
+                return
+            
+            # Don't update state if it's already complete
+            if self.current_state.is_complete():
                 return
             
             print("Debug: Current state:", self.current_state.__dict__)
@@ -176,34 +189,20 @@ class ConversationManager:
             extracted_info = json.loads(content)
             print("Debug: Parsed JSON:", extracted_info)
             
-            # Clean up and validate values before updating state
-            if 'origin' in extracted_info:
-                if extracted_info['origin'].upper() == 'ATLANTA':
-                    extracted_info['origin'] = 'ATL'
-                if extracted_info['origin'].upper() == 'BOSTON':
-                    extracted_info['origin'] = 'BOS'
-            
-            if 'destination' in extracted_info:
-                if extracted_info['destination'].upper() == 'ATLANTA':
-                    extracted_info['destination'] = 'ATL'
-                if extracted_info['destination'].upper() == 'BOSTON':
-                    extracted_info['destination'] = 'BOS'
-            
-            # Update state with cleaned values
+            # Only update fields that exist in the state class
+            valid_fields = set(self.current_state.__annotations__.keys())
             for key, value in extracted_info.items():
-                if value is not None and not isinstance(value, str):
-                    self.current_state.update(key, value)
-                elif isinstance(value, str) and not any(placeholder in value.upper() for placeholder in ["IATA CODE", "YYYY-MM-DD"]):
-                    self.current_state.update(key, value)
+                if key in valid_fields:  # Only update if key is a valid field
+                    if value is not None and not isinstance(value, str):
+                        self.current_state.update(key, value)
+                    elif isinstance(value, str) and not any(placeholder in value.upper() for placeholder in ["IATA CODE", "YYYY-MM-DD"]):
+                        self.current_state.update(key, value)
 
-            # Check completion based on intent
-            if self.current_intent == Intent.DIRECT_FLIGHT:
-                if all(getattr(self.current_state, field) is not None 
-                      for field in ['origin', 'destination', 'departure_date']):
+            # Only search flights once when state becomes complete
+            if self.current_state.is_complete():
+                if self.current_intent == Intent.DIRECT_FLIGHT:
                     await self._search_direct_flights()
-            elif self.current_intent == Intent.INSPIRATION:
-                if all(getattr(self.current_state, field) is not None 
-                      for field in ['origin', 'date_range', 'duration', 'max_price']):
+                elif self.current_intent == Intent.INSPIRATION:
                     await self._search_inspiration()
                 
         except Exception as e:
@@ -214,19 +213,73 @@ class ConversationManager:
     async def _search_direct_flights(self) -> None:
         """Search for direct flights using the flight API."""
         try:
+
             results = await get_flights(
                 origin=self.current_state.origin,
                 destination=self.current_state.destination,
                 departure_date=self.current_state.departure_date,
-                return_date=self.current_state.return_date,
+                return_date=None if self.current_state.is_one_way else self.current_state.return_date,
                 adults=self.current_state.passengers,
                 travel_class=self.current_state.travel_class
             )
+            
+            print("\nAPI Response:", json.dumps(results, indent=2))  # Debug print
+            
+            # Store results in the state
+            self.flight_results = results
+            
             print("\nFound flight options:")
-            for flight in results["flights"]:
-                print(f"- {flight}")
+            if "flights" in results and "oneWay" in results["flights"]:
+                flights = results["flights"]["oneWay"]["results"]
+                for idx, flight in enumerate(flights, 1):
+                    dep_segments = flight["departureItinerary"]
+                    total_price = flight["totalPrice"]
+                    currency = flight["currency"]
+                    
+                    print(f"\nOption {idx}:")
+                    print(f"  Total Price: {currency} {total_price}")
+                    print("  Segments:")
+                    for seg in dep_segments:
+                        dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
+                        arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
+                        print(f"    {seg['airlineName']}{seg['flightNumber']} "
+                              f"{seg['departure']['airport']} {dep_time} → "
+                              f"{seg['arrival']['airport']} {arr_time}")
+            
+            elif "flights" in results and "roundTrip" in results["flights"]:
+                flights = results["flights"]["roundTrip"]["results"]
+                for idx, flight in enumerate(flights, 1):
+                    print(f"\nOutbound Option {idx}:")
+                    print(f"  Starting from: {flight['departureMinPrice']} EUR")
+                    
+                    # Print outbound segments
+                    print("  Outbound Segments:")
+                    for seg in flight["departureItinerary"]:
+                        dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
+                        arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
+                        print(f"    {seg['airlineName']}{seg['flightNumber']} "
+                              f"{seg['departure']['airport']} {dep_time} → "
+                              f"{seg['arrival']['airport']} {arr_time}")
+                    
+                    # Print return options
+                    print(f"  Return Options ({flight['returnCount']} available):")
+                    for ret_idx, ret_flight in enumerate(flight["returnItineraries"][:3], 1):  # Show top 3 returns
+                        print(f"    Return Option {ret_idx}:")
+                        print(f"      Total Price: {ret_flight['totalPrice']} EUR")
+                        for seg in ret_flight["returnItinerary"]:
+                            dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
+                            arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
+                            print(f"      {seg['airlineName']}{seg['flightNumber']} "
+                                  f"{seg['departure']['airport']} {dep_time} → "
+                                  f"{seg['arrival']['airport']} {arr_time}")
+            
+            else:
+                print("No flights matching your criteria.")
+            
         except Exception as e:
-            print(f"Error searching flights: {str(e)}")
+            print(f"\nError searching flights: {str(e)}")
+            import traceback
+            print(traceback.format_exc())
 
     async def _search_inspiration(self) -> None:
         """Search for flight inspiration."""
@@ -249,9 +302,9 @@ class ConversationManager:
         if not self.current_state:
             return "I'm not sure what you're looking for. Can you please clarify if you want to book a specific flight or get travel suggestions?"
 
-        # If we've already searched and found results, don't generate a chatty response
-        if hasattr(self, '_search_completed') and self._search_completed:
-            return ""  # Return empty string to avoid additional messages after showing results
+        # If we have flight results, return empty string to avoid additional messages
+        if hasattr(self, 'flight_results'):
+            return ""
 
         state_dict = {key: getattr(self.current_state, key) 
                      for key in self.current_state.__annotations__}
