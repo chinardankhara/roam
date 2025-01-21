@@ -8,10 +8,11 @@ from openai import AsyncOpenAI
 from dotenv import load_dotenv
 from booking_utils import get_flight_inspiration, get_flights
 from datetime import datetime
+from pathlib import Path
+import tempfile
 
 load_dotenv()
 
-client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 def load_prompt(prompt_type: str, **kwargs) -> str:
     # Use os.path.join for cross-platform compatibility
@@ -102,6 +103,8 @@ class ConversationManager:
         self.history: List[Dict] = []
         self.current_intent: Intent = Intent.UNKNOWN
         self.current_state: Optional[ConversationState] = None
+        self.gpt_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
     
     async def process_message(self, message: str) -> str:
         print(f"\nProcessing message: {message}")
@@ -125,7 +128,7 @@ class ConversationManager:
     async def _classify_intent(self, message: str) -> Intent:
         """Use GPT-4 to classify user intent from their message."""
         try:
-            response = await client.chat.completions.create(
+            response = await self.gpt_client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=[
@@ -174,7 +177,7 @@ class ConversationManager:
                 }
             ]
             
-            response = await client.chat.completions.create(
+            response = await self.gpt_client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=messages,
@@ -263,7 +266,7 @@ class ConversationManager:
                 {"role": "user", "content": f"Current intent: {self.current_intent.value}\nCurrent state: {json.dumps(state_dict)}\nGenerate response"}
             ]
             
-            response = await client.chat.completions.create(
+            response = await self.gpt_client.chat.completions.create(
                 model="gpt-4-1106-preview",
                 response_format={"type": "json_object"},
                 messages=messages,
@@ -284,3 +287,31 @@ class ConversationManager:
             "intent": self.current_intent.value,
             "state": self.current_state.__dict__ if self.current_state else None
         })
+
+    async def process_audio(self, audio_bytes: bytes) -> str:
+        """Process audio using OpenAI's Whisper API and then send to GPT-4."""
+        try:
+            # Save audio bytes to a temporary file
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as tmp_file:
+                tmp_file.write(audio_bytes)
+                tmp_path = tmp_file.name
+
+            # Transcribe audio using Whisper API
+            with open(tmp_path, "rb") as audio_file:
+                transcript_response = await self.gpt_client.audio.transcriptions.create(
+                    model="whisper-1",
+                    file=audio_file,
+                    response_format="text"
+                )
+            
+            # Clean up temp file
+            Path(tmp_path).unlink()
+            
+            # Process the transcribed text through our normal message pipeline
+            return await self.process_message(transcript_response)
+            
+        except Exception as e:
+            print(f"Error processing audio: {str(e)}")
+            import traceback
+            print(traceback.format_exc())
+            return "Sorry, I had trouble understanding the audio. Could you please try again?"

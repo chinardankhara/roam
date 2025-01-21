@@ -264,9 +264,12 @@ async def get_flight_inspiration(
     def _validate_single_date(d: Union[str, date]) -> str:
         if isinstance(d, str):
             try:
-                d = parse_date(d).date()
+                # Remove any whitespace and ensure proper format
+                d = d.strip()
+                # Try to parse the date in YYYY-MM-DD format
+                d = datetime.strptime(d, "%Y-%m-%d").date()
             except ValueError:
-                raise ValueError(f"Invalid date format: {d}. Use YYYY-MM-DD format")
+                raise ValueError(f"Invalid date format: {d}. Must be YYYY-MM-DD")
         
         today = date.today()
         max_future_date = today + timedelta(days=180)
@@ -290,6 +293,19 @@ async def get_flight_inspiration(
             raise ValueError("End date must be after start date")
             
         departure_date_param = f"{start_date},{end_date}"
+    elif isinstance(departure_date, str) and "," in departure_date:
+        # Handle comma-separated date range string
+        try:
+            start_date, end_date = departure_date.split(",")
+            start_date = _validate_single_date(start_date.strip())
+            end_date = _validate_single_date(end_date.strip())
+            
+            if parse_date(start_date).date() >= parse_date(end_date).date():
+                raise ValueError("End date must be after start date")
+                
+            departure_date_param = f"{start_date},{end_date}"
+        except ValueError as e:
+            raise ValueError(f"Invalid date range format. Must be YYYY-MM-DD,YYYY-MM-DD: {str(e)}")
     else:
         departure_date_param = _validate_single_date(departure_date)
     

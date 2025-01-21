@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "audio-recorder-streamlit>=0.0.10",
     "httpx>=0.28.1",
     "openai>=1.59.6",
     "pytest-asyncio>=0.25.1",
@@ -12,6 +13,10 @@ dependencies = [
     "python-dateutil>=2.9.0.post0",
     "python-dotenv>=1.0.1",
     "streamlit>=1.41.1",
+    "streamlit-option-menu>=0.3.2",
+    "streamlit-webrtc>=0.47.1",
+    "av>=10.0.0",
+    "numpy>=1.24.3",
 ]
 [tool.pytest.ini_options]
 pythonpath = ["."]
