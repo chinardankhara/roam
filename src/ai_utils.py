@@ -290,10 +290,11 @@ class ConversationManager:
                 duration=self.current_state.duration,
                 max_price=self.current_state.max_price
             )
-            print("\nFound flight options:")
-            for result in results:
-                print(f"- {result['destination']}: ${result['price']} ({result['departureDate']} to {result['returnDate']})")
-            self._search_completed = True  # Mark that we've completed the search
+            
+            # Store results for UI display
+            self.inspiration_results = results
+            self._search_completed = True
+            
         except Exception as e:
             print(f"Error searching flights: {str(e)}")
 
