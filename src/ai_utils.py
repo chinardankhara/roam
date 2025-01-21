@@ -150,9 +150,7 @@ class ConversationManager:
     
     async def _update_state(self, message: str) -> None:
         try:
-            print("Debug: Starting _update_state")
             if self.current_state is None:
-                print("Debug: No current state")
                 return
             
             # Don't update state if it's already complete
@@ -184,10 +182,8 @@ class ConversationManager:
             )
             
             content = response.choices[0].message.content
-            print("Debug: Response content:", content)
             
             extracted_info = json.loads(content)
-            print("Debug: Parsed JSON:", extracted_info)
             
             # Only update fields that exist in the state class
             valid_fields = set(self.current_state.__annotations__.keys())
@@ -211,70 +207,20 @@ class ConversationManager:
             print(traceback.format_exc())
 
     async def _search_direct_flights(self) -> None:
-        """Search for direct flights using the flight API."""
+        """Search for direct flights."""
         try:
-
             results = await get_flights(
                 origin=self.current_state.origin,
                 destination=self.current_state.destination,
                 departure_date=self.current_state.departure_date,
-                return_date=None if self.current_state.is_one_way else self.current_state.return_date,
+                return_date=self.current_state.return_date,
                 adults=self.current_state.passengers,
-                travel_class=self.current_state.travel_class
+                travel_class=self.current_state.travel_class,
             )
             
-            print("\nAPI Response:", json.dumps(results, indent=2))  # Debug print
-            
-            # Store results in the state
-            self.flight_results = results
-            
-            print("\nFound flight options:")
-            if "flights" in results and "oneWay" in results["flights"]:
-                flights = results["flights"]["oneWay"]["results"]
-                for idx, flight in enumerate(flights, 1):
-                    dep_segments = flight["departureItinerary"]
-                    total_price = flight["totalPrice"]
-                    currency = flight["currency"]
-                    
-                    print(f"\nOption {idx}:")
-                    print(f"  Total Price: {currency} {total_price}")
-                    print("  Segments:")
-                    for seg in dep_segments:
-                        dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
-                        arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
-                        print(f"    {seg['airlineName']}{seg['flightNumber']} "
-                              f"{seg['departure']['airport']} {dep_time} → "
-                              f"{seg['arrival']['airport']} {arr_time}")
-            
-            elif "flights" in results and "roundTrip" in results["flights"]:
-                flights = results["flights"]["roundTrip"]["results"]
-                for idx, flight in enumerate(flights, 1):
-                    print(f"\nOutbound Option {idx}:")
-                    print(f"  Starting from: {flight['departureMinPrice']} EUR")
-                    
-                    # Print outbound segments
-                    print("  Outbound Segments:")
-                    for seg in flight["departureItinerary"]:
-                        dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
-                        arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
-                        print(f"    {seg['airlineName']}{seg['flightNumber']} "
-                              f"{seg['departure']['airport']} {dep_time} → "
-                              f"{seg['arrival']['airport']} {arr_time}")
-                    
-                    # Print return options
-                    print(f"  Return Options ({flight['returnCount']} available):")
-                    for ret_idx, ret_flight in enumerate(flight["returnItineraries"][:3], 1):  # Show top 3 returns
-                        print(f"    Return Option {ret_idx}:")
-                        print(f"      Total Price: {ret_flight['totalPrice']} EUR")
-                        for seg in ret_flight["returnItinerary"]:
-                            dep_time = datetime.fromisoformat(seg["departure"]["time"]).strftime("%H:%M")
-                            arr_time = datetime.fromisoformat(seg["arrival"]["time"]).strftime("%H:%M")
-                            print(f"      {seg['airlineName']}{seg['flightNumber']} "
-                                  f"{seg['departure']['airport']} {dep_time} → "
-                                  f"{seg['arrival']['airport']} {arr_time}")
-            
-            else:
-                print("No flights matching your criteria.")
+            # Store results for UI display
+            self.flight_results = results["flights"]
+            self._search_completed = True
             
         except Exception as e:
             print(f"\nError searching flights: {str(e)}")
