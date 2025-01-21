@@ -79,7 +79,7 @@ with header_col2:
         st.experimental_rerun()
 
 # Chat input
-user_input = st.chat_input("Type your message here...")
+user_input = st.chat_input("How can I assist you with your travel plans today?")
 
 # Display chat history
 for message in st.session_state.messages:
